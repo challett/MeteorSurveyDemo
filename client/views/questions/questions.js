@@ -3,7 +3,7 @@
  */
 Template.questions.helpers({
     "questionSchema": function(){
-        var QuestionSchema = new SimpleSchema({
+        return new SimpleSchema({
             categoryId: {
                 type: String,
                 label: 'ID of Category',
@@ -25,22 +25,9 @@ Template.questions.helpers({
                         {label: "1", value: "1"},
                         {label: "2", value: "2"}
                     ]
-                },
-            },
-
-            updatedAt: {
-                type: Date,
-                optional: true,
-                label: 'Time of most recent update',
-                autoValue: function () {
-                    if (Meteor.isServer && (this.isInsert || this.isUpdate)) {
-                        return new Date();
-                    }
                 }
             }
         });
-
-        return QuestionSchema;
     },
     "question": function(){
         return Questions.find();
@@ -50,26 +37,19 @@ Template.questions.helpers({
     }
 });
 
+Template.questions.rendered = function () {
+    if(Questions.find().count() === 0){
+        Questions.insert({categoryName: "cat1", text: "test question 1"});
+        Questions.insert({categoryName: "cat2", text: "test question 2"});
+        Questions.insert({categoryName: "cat3", text: "test question 3"});
+        Questions.insert({categoryName: "cat4", text: "test question 4"});
+    }
+};
+
 Template.questions.events({
     'click .see-results': function (e) {
         e.preventDefault();
         Router.go('results')
 
-    }
-});
-AutoForm.hooks({
-    submitAnswers: {
-        onSubmit: function (insertDoc, updateDoc, currentDoc) {
-            console.log('answers submitted');
-            console.log(insertDoc)
-            console.log(currentDoc)
-            if (insertDoc) {
-                Answers.insert({categoryId: "test", score: 1});
-                this.done();
-            } else {
-                this.done(new Error("Submission failed"));
-            }
-            return false;
-        }
     }
 });

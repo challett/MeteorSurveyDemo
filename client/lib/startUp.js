@@ -4,7 +4,8 @@
 Meteor.startup(function () {
     Meteor.disconnect();
     Questions = new Ground.Collection('questions', { connection: null });
-    Answers = new Ground.Collection('answers', { connection: null })
+    Answers = new Ground.Collection('answers', { connection: null });
+    Categories = new Ground.Collection('categories', { connection: null });
 
     Session.set('data', [
         {
@@ -13,7 +14,8 @@ Meteor.startup(function () {
             "score": "7",
             "weight": "1",
             "color": "#4D9DB4",
-            "label": "Fisheries"
+            "label": "Fisheries",
+            extrafield: "test"
         },
         {
             "id": "MAR",
@@ -38,14 +40,6 @@ Meteor.startup(function () {
             "weight": "1",
             "color": "#FB9F59",
             "label": "fourth One"
-        },
-        {
-            "id": "test",
-            "order": "1.3",
-            "score": "100",
-            "weight": "1",
-            "color": "#000",
-            "label": "different"
         }
     ])
 });
