@@ -3,7 +3,7 @@
  */
 
 ContentsRoutesController = RouteController.extend({
-    template: 'contents',
+    template: 'questions',
     data: function() {
         return {
         };
@@ -13,8 +13,8 @@ ContentsRoutesController = RouteController.extend({
     }
 });
 
-Router.route('/', {
-    name: 'tableOfContents',
+Router.route('/questions', {
+    name: 'questions',
     controller: ContentsRoutesController,
     yieldTemplates: {
     }

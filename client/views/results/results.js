@@ -9,7 +9,7 @@ Template.results.helpers({
 Template.results.events({
     'click .btn-questions': function (e) {
         e.preventDefault();
-        Router.go('/');
+        Router.go('/questions', {}, {replaceState: true});
     }
 });
 
@@ -19,7 +19,8 @@ Template.results.rendered = function () {
         cat3Value = 0,
         cat4Value = 0;
 
-    if (Categories.find().count() === 0){
+    if (Categories.find().count() === 0 || Categories.find().count() !== 4){
+        Categories.remove({});
         Categories.insert(
             {
                 name: "cat1",
@@ -72,22 +73,22 @@ Template.results.rendered = function () {
 
     var cat1Questions = Questions.find({categoryName: 'cat1'}).fetch();
     lodash.each(cat1Questions, function (v,k) {
-        cat1Value += +v.answer * 20;
+        cat1Value += +v.answer * 50;
     });
 
     var cat2Questions = Questions.find({categoryName: 'cat2'}).fetch();
     lodash.each(cat2Questions, function (v,k) {
-        cat2Value += +v.answer * 20;
+        cat2Value += +v.answer * 50;
     });
 
     var cat3Questions = Questions.find({categoryName: 'cat3'}).fetch();
     lodash.each(cat3Questions, function (v,k) {
-        cat3Value += +v.answer * 20;
+        cat3Value += +v.answer * 50;
     });
 
     var cat4Questions = Questions.find({categoryName: 'cat4'}).fetch();
     lodash.each(cat4Questions, function (v,k) {
-        cat4Value += +v.answer * 20;
+        cat4Value += +v.answer * 50;
     });
 
     Categories.update(
@@ -107,8 +108,8 @@ Template.results.rendered = function () {
         {$set: {score: cat4Value}}
     );
 
-    var width = 500,
-        height = 500,
+    var width = Math.min(parseInt(d3.select('#graph').style('width'), 10), 500),
+        height = Math.min(parseInt(d3.select('#graph').style('width'), 10), 500),
         radius = Math.min(width, height) / 2,
         innerRadius = 0.3 * radius;
 

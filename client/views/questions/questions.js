@@ -33,12 +33,13 @@ Template.questions.helpers({
         return Questions.find();
     },
     makeUniqueID: function () {
-        return "update-each-" + this._id;
+        return  this._id;
     }
 });
 
 Template.questions.rendered = function () {
-    if(Questions.find().count() === 0){
+    if(Questions.find().count() === 0 || Questions.find().count() !== 4){
+        Questions.remove({});
         Questions.insert({categoryName: "cat1", text: "test question 1"});
         Questions.insert({categoryName: "cat2", text: "test question 2"});
         Questions.insert({categoryName: "cat3", text: "test question 3"});
@@ -49,7 +50,19 @@ Template.questions.rendered = function () {
 Template.questions.events({
     'click .see-results': function (e) {
         e.preventDefault();
-        Router.go('results')
+        Router.go('results', {}, {replaceState: true})
 
+    }
+});
+
+AutoForm.hooks({
+    "RN9pvHnWjPHysvvKs": {
+        onSuccess: function () {
+            console.log('success')
+        },
+        onError: function (ft, e) {
+            console.log('fail')
+            console.log(e)
+        }
     }
 });

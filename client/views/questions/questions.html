@@ -12,7 +12,7 @@
                 <td>{{text}}</td>
                 <td>
                     {{#autoForm id=makeUniqueID schema=questionSchema type="update" collection="Questions" doc=this autosave=true validation="none"}}
-                        {{> afFieldInput type="select-radio-inline" name="answer"}}
+                        {{> afFieldInput type="select-radio" name="answer"}}
                     {{/autoForm}}
                 </td>
             </tr>
