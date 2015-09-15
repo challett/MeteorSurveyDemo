@@ -1,3 +1,23 @@
 <template name="questions">
-    
+    <table class="table table-bordered table-condensed">
+        <thead>
+            <tr>
+                <td style="width: 85px">Question</td>
+                <td style="width: 250px">Answer</td>
+            </tr>
+        </thead>
+        <tbody>
+        {{#each question}}
+            <tr>
+                <td>{{text}}</td>
+                <td>
+                    {{#autoForm id=makeUniqueID schema=questionSchema type="update" collection="Questions" doc=this autosave=true validation="none"}}
+                        {{> afFieldInput type="select-radio-inline" name="answer"}}
+                    {{/autoForm}}
+                </td>
+            </tr>
+        {{/each}}
+        </tbody>
+    </table>
+    <a class="btn btn-default see-results" href="#" role="button">See Wheel</a>
 </template>

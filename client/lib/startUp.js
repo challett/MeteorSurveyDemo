@@ -2,11 +2,15 @@
  * Created by Connor on 9/14/2015.
  */
 Meteor.startup(function () {
+    Meteor.disconnect();
+    Questions = new Ground.Collection('questions', { connection: null });
+    Answers = new Ground.Collection('answers', { connection: null })
+
     Session.set('data', [
         {
             "id": "FIS",
             "order": "1.1",
-            "score": "70",
+            "score": "7",
             "weight": "1",
             "color": "#4D9DB4",
             "label": "Fisheries"
@@ -34,6 +38,14 @@ Meteor.startup(function () {
             "weight": "1",
             "color": "#FB9F59",
             "label": "fourth One"
+        },
+        {
+            "id": "test",
+            "order": "1.3",
+            "score": "100",
+            "weight": "1",
+            "color": "#000",
+            "label": "different"
         }
     ])
 });

@@ -2,8 +2,8 @@
  * Created by Connor on 9/15/2015.
  */
 
-ContentsRoutesController = RouteController.extend({
-    template: 'questions',
+ResultRoutesController = RouteController.extend({
+    template: 'results',
     data: function() {
         return {
         };
@@ -13,9 +13,9 @@ ContentsRoutesController = RouteController.extend({
     }
 });
 
-Router.route('/', {
-    name: 'tableOfContents',
-    controller: ContentsRoutesController,
+Router.route('/results', {
+    name: 'results',
+    controller: ResultRoutesController,
     yieldTemplates: {
     }
 });
