@@ -3,7 +3,7 @@
  */
 Template.contents.events({
     'click .see-questions': function (e) {
-        e.stopImmediatePropagation();
+        e.preventDefault();
         Router.go('/questions', {}, {replaceState: true});
     }
 });
